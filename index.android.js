@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {AppRegistry} from 'react-native';
 import {Provider} from 'react-redux';
 
-import './polyfills';
+import './shim';
 import createStore from './app/dispatcher';
 import Application from './app/components/Application';
 
