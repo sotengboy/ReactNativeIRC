@@ -40,10 +40,6 @@ export default function(state, action) {
       return channelMessage(state, action);
     case 'PARTED_CHANNEL':
       return partedChannel(state, action);
-    // case 'NICK_CHANGED':
-    //   return nickChanged(state, action);
-    // case 'USER_NICK_CHANGED':
-    //   return nickChanged(state, action);
     default:
       return state;
   }
@@ -145,35 +141,8 @@ function partedChannel(state, {channel}) {
   ;
 }
 
-// function nickChanged(state, {oldNick, newNick, channels}) {
-//   channels.forEach(channel => {
-//     if (state.hasIn(['channels', channel, 'users', oldNick])) {
-//       const prevMode = state.getIn(['channels', channel, 'users', oldNick]);
-//       state = state
-//         .deleteIn(['channels', channel, 'users', oldNick])
-//         .setIn(['channels', channel, 'users', newNick], prevMode)
-//       ;
-//     }
-//   });
-// 
-//   return state;
-// }
-// 
-// function userNickChanged(state, {oldNick, newNick, channels}) {
-// 
-//   return updateNickInChannels(state, {oldNick, newNick});
-// }
-
 function pushChannelStatusMessage(state, {channel, message}) {
   return state.updateIn(['channels', channel, 'messages'],
     messages => messages.push(Map({message, type: 'status'}))
   );
 }
-//
-// function updateInChannelUsers(state, channel, callback) {
-//   return state.updateIn(['channels', channel, 'users'], users => callback(users));
-// }
-//
-// function updateInChannelMessages(state, channel, callback) {
-//   return state.updateIn(['channels', channel, 'messages'], messages => callback(messages));
-// }

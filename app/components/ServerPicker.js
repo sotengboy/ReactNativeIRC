@@ -1,12 +1,44 @@
 import React, {Component} from 'react'
-import {View, Text, TextInput, TouchableHighlight, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableHighlight,
+  StyleSheet,
+  ActivityIndicator
+} from 'react-native';
 
 import {createConnection} from '../actions';
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 80,
+    paddingLeft: 16,
+    paddingRight: 16,
+    backgroundColor: '#E1E1E1',
+  },
+  connecting: {
+    marginBottom: 16,
+    alignItems: 'center',
+  },
   textInput: {
+    marginBottom: 16,
+    paddingLeft: 8,
     height: 40,
+    backgroundColor: '#FFFFFF',
+    borderColor: '#CCCCCC',
+    borderWidth: 1,
+  },
+  touchable: {
+    alignItems: 'center',
+    paddingTop: 12,
+    paddingBottom: 12,
+    backgroundColor: '#222222',
+  },
+  touchableText: {
+    color: '#FFFFFF',
   },
   loading: {
     padding: 16,
@@ -26,8 +58,8 @@ class ServerPicker extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      host: 'irc.phpfreaks.com',
-      nick: 'Adam',
+      host: '',
+      nick: '',
     };
 
     this.onPressConnect = this.onPressConnect.bind(this);
@@ -51,11 +83,16 @@ class ServerPicker extends Component {
   }
 
   render() {
+    if (this.props.connecting) {
+      return this.renderLoadingIndicator();
+    }
+
     return (
-      <View>
+      <View style={styles.container}>
         <TextInput
           value={this.state.host}
           placeholder="Host"
+          autoFocus
           autoCorrect={false}
           autoCapitalize="none"
           style={styles.textInput}
@@ -69,22 +106,24 @@ class ServerPicker extends Component {
           style={styles.textInput}
           onChangeText={this.handleNickChange}
         />
-        <TouchableHighlight onPress={this.onPressConnect}>
-          <Text>Connect</Text>
+        <TouchableHighlight onPress={this.onPressConnect} style={styles.touchable}>
+          <Text style={styles.touchableText}>
+            Connect
+          </Text>
         </TouchableHighlight>
 
-        {this.renderPotentialLoading()}
         {this.renderPotentialError()}
       </View>
     );
   }
 
-  renderPotentialLoading() {
-    if (!this.props.connecting) return false;
-
+  renderLoadingIndicator() {
     return (
-      <View style={styles.loading}>
-        <Text>Connecting...</Text>
+      <View style={styles.container}>
+        <View style={styles.connecting}>
+          <Text>Connecting</Text>
+        </View>
+        <ActivityIndicator />
       </View>
     );
   }
