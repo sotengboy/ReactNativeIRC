@@ -11,11 +11,24 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     marginRight: 8,
   },
+  time: {
+    marginRight: 8,
+  },
+  timeText: {
+    color: '#555555',
+    fontSize: 14,
+  },
   sender: {
+    marginRight: 8,
+  },
+  senderText: {
     fontWeight: '500',
   },
   message: {
-    paddingLeft: 4,
+    flex: 1,
+  },
+  messageText: {
+    color: '#222222',
   },
 });
 
@@ -27,13 +40,18 @@ class Message extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View>
-          <Text style={styles.sender}>
-            {this.props.message.get('sender')}
+        <View style={styles.time}>
+          <Text style={styles.timeText}>
+            13:23:11
+          </Text>
+        </View>
+        <View style={styles.sender}>
+          <Text style={styles.senderText}>
+            {'<'}{this.props.message.get('sender')}{'>'}
           </Text>
         </View>
         <View style={styles.message}>
-          <Text>
+          <Text style={styles.messageText}>
             {this.props.message.get('message')}
           </Text>
         </View>

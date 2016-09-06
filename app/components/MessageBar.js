@@ -5,9 +5,14 @@ import {connect} from 'react-redux';
 import {sendMessage} from '../actions';
 
 const styles = StyleSheet.create({
+  container: {
+    borderTopColor: '#CCCCCC',
+    borderTopWidth: 1,
+  },
   input: {
     height: 42,
     paddingLeft: 8,
+    fontSize: 14,
     backgroundColor: '#FFFFFF',
   },
 });
@@ -41,11 +46,12 @@ class MessageBar extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <TextInput
           value={this.state.value}
           placeholder="Message"
           returnKeyType="send"
+          autoFocus
           autoCorrect={false}
           autoCapitalize="none"
           style={styles.input}

@@ -5,8 +5,11 @@ import {connect} from 'react-redux';
 
 const styles = StyleSheet.create({
   container: {
-    padding: 8,
-    backgroundColor: '#666666',
+    paddingTop: 16,
+    paddingBottom: 16,
+    paddingLeft: 8,
+    paddingRight: 8,
+    backgroundColor: '#333333',
   },
   text: {
     color: '#FFFFFF',
@@ -28,7 +31,7 @@ class ServerDetails extends Component {
           {serverDetails.get('host')}
           {activeChannel && (
             <Text>
-              {' > '} {activeChannel}
+              {' > '}{activeChannel}
             </Text>
           )}
         </Text>

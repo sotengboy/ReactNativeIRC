@@ -6,5 +6,10 @@ export default function(client, {channel, message}) {
     return;
   }
 
+  if (message === '/leave' || message === '/part') {
+    client.part(channel);
+    return;
+  }
+
   client.say(channel, message);
 }

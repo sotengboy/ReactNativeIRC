@@ -9,6 +9,8 @@ import {
   userPartedChannel,
   channelMessage,
   partedChannel,
+  // nickChanged,
+  // userNickChanged,
 } from '../actions';
 
 export default function(client, dispatch, {host, nick}) {
@@ -32,6 +34,10 @@ export default function(client, dispatch, {host, nick}) {
     }
   });
 
+  // client.addListener('+mode', (...args) => {
+  //   console.log(args);
+  // });
+
   client.addListener('part', (channel, partedUser) => {
     if (nick === partedUser) {
       dispatch(partedChannel({channel}));
@@ -51,4 +57,12 @@ export default function(client, dispatch, {host, nick}) {
   client.addListener('message', (sender, channel, message) => {
     dispatch(channelMessage({sender, channel, message}));
   });
+
+  // client.addListener('nick', (oldNick, newNick, channels) => {
+  //   if (nick === oldNick) {
+  //     dispatch(nickChanged({newNick}));
+  //   } else {
+  //     dispatch(userNickChanged({oldNick, newNick, channels}));
+  //   }
+  // });
 }

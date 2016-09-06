@@ -1,18 +1,21 @@
 import React, {Component} from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import {View, Text, StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
     marginTop: 4,
     marginBottom: 4,
     marginLeft: 8,
     marginRight: 8,
   },
+  icon: {
+    marginRight: 8,
+  },
   message: {
-    color: '#999999',
+    color: '#888888',
   },
 });
 
@@ -25,7 +28,9 @@ class StatusMessage extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.message}>
-          {'> '} {this.props.message.get('message')}
+          <Icon name="bell-o" size={12} style={styles.icon} />
+          {' '}
+          {this.props.message.get('message')}
         </Text>
       </View>
     );
