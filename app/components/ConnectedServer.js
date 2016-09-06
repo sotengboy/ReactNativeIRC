@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Navigator, Text, View, TouchableHighlight, StatusBar, StyleSheet} from 'react-native';
+import {View, StatusBar, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 
 import ServerDetails from './ServerDetails';
@@ -20,29 +20,10 @@ class ConnectedServer extends Component {
   }
 
   render() {
-    const routes = [
-      {title: 'First Scene', index: 0},
-      {title: 'Second Scene', index: 1},
-    ];
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor="#000000" />
-          <Navigator
-            initialRoute={routes[0]}
-            initialRouteStack={routes}
-            renderScene={(route, navigator) =>
-              <TouchableHighlight onPress={() => {
-                if (route.index === 0) {
-                  navigator.push(routes[1]);
-                } else {
-                  navigator.pop();
-                }
-              }}>
-              <Text>Hello {route.title}!</Text>
-              </TouchableHighlight>
-            }
-            style={{padding: 100}}
-          />
+        <ServerDetails />
         {this.props.activeChannel && (
           <MessageList />
         )}

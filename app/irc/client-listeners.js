@@ -55,7 +55,12 @@ export default function(client, dispatch, {host, nick}) {
   });
 
   client.addListener('message', (sender, channel, message) => {
-    dispatch(channelMessage({sender, channel, message}));
+    dispatch(channelMessage({
+      sender,
+      channel,
+      message,
+      received: new Date()
+    }));
   });
 
   // client.addListener('nick', (oldNick, newNick, channels) => {

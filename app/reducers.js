@@ -115,9 +115,7 @@ function channelUsers(state, {channel, users}) {
 }
 
 function userJoinedChannel(state, {channel, joinedUser}) {
-  state = state.mergeIn(['channels', channel, 'users'],
-    users => users.push(joinedUser)
-  );
+  state = state.setIn(['channels', channel, 'users', joinedUser], '');
 
   return pushChannelStatusMessage(state, {
     channel,
@@ -126,9 +124,7 @@ function userJoinedChannel(state, {channel, joinedUser}) {
 }
 
 function userPartedChannel(state, {channel, partedUser}) {
-  state = state.updateIn(['channels', channel, 'users'],
-    users => users.filter(user => user !== partedUser)
-  );
+  state = state.deleteIn(['channels', channel, 'users', partedUser]);
 
   return pushChannelStatusMessage(state, {
     channel,
@@ -136,9 +132,9 @@ function userPartedChannel(state, {channel, partedUser}) {
   });
 }
 
-function channelMessage(state, {channel, sender, message}) {
+function channelMessage(state, {channel, sender, received, message}) {
   return state.updateIn(['channels', channel, 'messages'],
-    messages => messages.push(Map({sender, message, type: 'user'}))
+    messages => messages.push(Map({sender, message, received, type: 'user'}))
   );
 }
 
