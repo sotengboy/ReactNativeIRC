@@ -72,11 +72,3 @@ export function partedChannel(payload) {
 export function messageSent(payload) {
   return {type: 'MESSAGE_SENT', ...payload};
 }
-
-// export function nickChanged(payload) {
-//   return {type: 'NICK_CHANGED', ...payload};
-// }
-//
-// export function userNickChanged(payload) {
-//   return {type: 'USER_NICK_CHANGED', ...payload};
-// }
