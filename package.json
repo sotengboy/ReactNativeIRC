@@ -23,7 +23,7 @@
     "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
-    "@skybetintl/eslint-rules": "^4.0.0",
+    "eslint-rules": "^0.4.3",
     "babel": "^6.5.2",
     "babel-eslint": "^6.1.2",
     "babel-plugin-react-transform": "^2.0.2",
