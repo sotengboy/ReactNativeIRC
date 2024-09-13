@@ -1,31 +1,30 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-import ServerPicker from './ServerPicker';
-import ConnectedServer from './ConnectedServer';
+import ServerPicker from "./ServerPicker";
+import ConnectedServer from "./ConnectedServer";
 
 class Application extends Component {
   static propTypes = {
-    connected: React.PropTypes.bool,
-  }
+    connected: PropTypes.bool,
+  };
 
   render() {
     if (!this.props.connected) {
-      return (
-        <ServerPicker />
-      );
+      return <ServerPicker />;
     }
 
-    return (
-      <ConnectedServer />
-    );
+    return <ConnectedServer />;
   }
 }
 
 function mapState(state) {
-  return {
-    connected: !!state.getIn(['serverDetails', 'connected']),
-  };
+  if (state) {
+    return {
+      connected: !!state.getIn(["serverDetails", "connected"]),
+    };
+  }
 }
 
 export default connect(mapState)(Application);

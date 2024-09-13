@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
-import {View, Text, StyleSheet} from 'react-native';
-import {connect} from 'react-redux';
+import React, { Component } from "react";
+import ImmutablePropTypes from "react-immutable-proptypes";
+import PropTypes from "prop-types";
+import { View, Text, StyleSheet } from "react-native";
+import { connect } from "react-redux";
 
 const styles = StyleSheet.create({
   container: {
@@ -9,29 +10,30 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
     paddingLeft: 8,
     paddingRight: 8,
-    backgroundColor: '#333333',
+    backgroundColor: "#333333",
   },
   text: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
   },
 });
 
 class ServerDetails extends Component {
   static propTypes = {
     serverDetails: ImmutablePropTypes.map,
-    activeChannel: React.PropTypes.string,
-  }
+    activeChannel: PropTypes.string,
+  };
 
   render() {
-    const {serverDetails, activeChannel} = this.props;
+    const { serverDetails, activeChannel } = this.props;
 
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-          {serverDetails.get('host')}
+          {serverDetails.get("host")}
           {activeChannel && (
             <Text>
-              {' > '}{activeChannel}
+              {" > "}
+              {activeChannel}
             </Text>
           )}
         </Text>
@@ -42,8 +44,8 @@ class ServerDetails extends Component {
 
 function mapStateToProps(state) {
   return {
-    serverDetails: state.get('serverDetails'),
-    activeChannel: state.get('activeChannel'),
+    serverDetails: state.get("serverDetails"),
+    activeChannel: state.get("activeChannel"),
   };
 }
 

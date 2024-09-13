@@ -1,15 +1,17 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
 import {
   View,
   Text,
   TextInput,
   TouchableHighlight,
   StyleSheet,
-  ActivityIndicator
-} from 'react-native';
+  ActivityIndicator,
+} from "react-native";
 
-import {createConnection} from '../actions';
+import { createConnection } from "../actions";
 
 const styles = StyleSheet.create({
   container: {
@@ -17,28 +19,28 @@ const styles = StyleSheet.create({
     paddingTop: 80,
     paddingLeft: 16,
     paddingRight: 16,
-    backgroundColor: '#E1E1E1',
+    backgroundColor: "#E1E1E1",
   },
   connecting: {
     marginBottom: 16,
-    alignItems: 'center',
+    alignItems: "center",
   },
   textInput: {
     marginBottom: 16,
     paddingLeft: 8,
     height: 40,
-    backgroundColor: '#FFFFFF',
-    borderColor: '#CCCCCC',
+    backgroundColor: "#FFFFFF",
+    borderColor: "#CCCCCC",
     borderWidth: 1,
   },
   touchable: {
-    alignItems: 'center',
+    alignItems: "center",
     paddingTop: 12,
     paddingBottom: 12,
-    backgroundColor: '#222222',
+    backgroundColor: "#222222",
   },
   touchableText: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
   },
   loading: {
     padding: 16,
@@ -50,16 +52,16 @@ const styles = StyleSheet.create({
 
 class ServerPicker extends Component {
   static propTypes = {
-    createConnection: React.PropTypes.func,
-    connecting: React.PropTypes.bool,
-    error: React.PropTypes.bool,
-  }
+    createConnection: PropTypes.func,
+    connecting: PropTypes.bool,
+    error: PropTypes.bool,
+  };
 
   constructor(props) {
     super(props);
     this.state = {
-      host: '',
-      nick: '',
+      host: "",
+      nick: "",
     };
 
     this.onPressConnect = this.onPressConnect.bind(this);
@@ -75,11 +77,11 @@ class ServerPicker extends Component {
   }
 
   handleHostChange(value) {
-    return this.setState({host: value});
+    return this.setState({ host: value });
   }
 
   handleNickChange(value) {
-    return this.setState({nick: value});
+    return this.setState({ nick: value });
   }
 
   render() {
@@ -106,10 +108,11 @@ class ServerPicker extends Component {
           style={styles.textInput}
           onChangeText={this.handleNickChange}
         />
-        <TouchableHighlight onPress={this.onPressConnect} style={styles.touchable}>
-          <Text style={styles.touchableText}>
-            Connect
-          </Text>
+        <TouchableHighlight
+          onPress={this.onPressConnect}
+          style={styles.touchable}
+        >
+          <Text style={styles.touchableText}>Connect</Text>
         </TouchableHighlight>
 
         {this.renderPotentialError()}
@@ -142,14 +145,14 @@ class ServerPicker extends Component {
 
 function mapState(state) {
   return {
-    connecting: state.getIn(['serverDetails', 'connecting']),
-    error: state.getIn(['serverDetails', 'error']),
+    connecting: state.getIn(["serverDetails", "connecting"]),
+    error: state.getIn(["serverDetails", "error"]),
   };
 }
 
 function mapDispatch(dispatch) {
   return {
-    createConnection: options => dispatch(createConnection(options)),
+    createConnection: (options) => dispatch(createConnection(options)),
   };
 }
 

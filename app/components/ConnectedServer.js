@@ -1,32 +1,31 @@
-import React, {Component} from 'react';
-import {View, StatusBar, StyleSheet} from 'react-native';
-import {connect} from 'react-redux';
+import React, { Component } from "react";
+import { View, StatusBar, StyleSheet } from "react-native";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-import ServerDetails from './ServerDetails';
-import MessageBar from './MessageBar';
-import MessageList from './MessageList';
+import ServerDetails from "./ServerDetails";
+import MessageBar from "./MessageBar";
+import MessageList from "./MessageList";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 20,
-    backgroundColor: '#E1E1E1',
+    backgroundColor: "#E1E1E1",
   },
 });
 
 class ConnectedServer extends Component {
   static propTypes = {
-    activeChannel: React.PropTypes.string,
-  }
+    activeChannel: PropTypes.string,
+  };
 
   render() {
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor="#000000" />
         <ServerDetails />
-        {this.props.activeChannel && (
-          <MessageList />
-        )}
+        {this.props.activeChannel && <MessageList />}
         <MessageBar />
       </View>
     );
@@ -35,7 +34,7 @@ class ConnectedServer extends Component {
 
 function mapState(state) {
   return {
-    activeChannel: state.get('activeChannel'),
+    activeChannel: state.get("activeChannel"),
   };
 }
 

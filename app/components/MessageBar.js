@@ -1,38 +1,39 @@
-import React, {Component} from 'react';
-import {View, TextInput, StyleSheet} from 'react-native';
-import {connect} from 'react-redux';
+import React, { Component } from "react";
+import { View, TextInput, StyleSheet } from "react-native";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-import {sendMessage} from '../actions';
+import { sendMessage } from "../actions";
 
 const styles = StyleSheet.create({
   container: {
-    borderTopColor: '#CCCCCC',
+    borderTopColor: "#CCCCCC",
     borderTopWidth: 1,
   },
   input: {
     height: 42,
     paddingLeft: 8,
     fontSize: 14,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
   },
 });
 
 class MessageBar extends Component {
   static propTypes = {
-    sendMessage: React.PropTypes.func,
-    activeChannel: React.PropTypes.string,
-  }
+    sendMessage: PropTypes.func,
+    activeChannel: PropTypes.string,
+  };
 
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = { value: "" };
 
     this.handleChange = this.handleChange.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
   }
 
   handleChange(value) {
-    this.setState({value});
+    this.setState({ value });
   }
 
   sendMessage() {
@@ -41,7 +42,7 @@ class MessageBar extends Component {
       channel: this.props.activeChannel,
     });
 
-    this.setState({value: ''});
+    this.setState({ value: "" });
   }
 
   render() {
@@ -65,13 +66,13 @@ class MessageBar extends Component {
 
 function mapState(state) {
   return {
-    activeChannel: state.get('activeChannel'),
+    activeChannel: state.get("activeChannel"),
   };
 }
 
 function mapDispatch(dispatch) {
   return {
-    sendMessage: options => dispatch(sendMessage(options)),
+    sendMessage: (options) => dispatch(sendMessage(options)),
   };
 }
 

@@ -1,20 +1,21 @@
 /* eslint-env browser */
-import React, {Component} from 'react';
-import {AppRegistry} from 'react-native';
-import {Provider} from 'react-redux';
+import React, { Component } from "react";
+import { AppRegistry } from "react-native";
+import { Provider } from "react-redux";
 
-import './shim';
-import createStore from './app/dispatcher';
-import Application from './app/components/Application';
+import "./shim";
+import { name as appName } from "./app.json";
+import Store from "./app/dispatcher";
+import Application from "./app/components/Application";
 
-class AwesomeProject extends Component {
+class EvoChat extends Component {
   render() {
     return (
-      <Provider store={createStore()}>
+      <Provider store={Store()}>
         <Application />
       </Provider>
     );
   }
 }
 
-AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
+AppRegistry.registerComponent(appName, () => EvoChat);
